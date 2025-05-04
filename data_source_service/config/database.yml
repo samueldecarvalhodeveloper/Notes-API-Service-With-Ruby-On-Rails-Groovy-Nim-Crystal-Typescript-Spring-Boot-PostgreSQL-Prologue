@@ -1,0 +1,20 @@
+default: &default
+  adapter: <%= ENV["ADAPTER"] %>
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["HOST"] %>
+  database: <%= ENV["DATABASE"] %>
+  username: <%= ENV["USERNAME"] %>
+  password: <%= ENV["PASSWORD"] %>
+
+test:
+  <<: *default
+  port: <%= ENV["TESTING_PORT"] %>
+
+development:
+  <<: *default
+  port: <%= ENV["DEVELOPMENT_PORT"] %>
+
+production:
+  <<: *default
+  port: <%= ENV["PRODUCTION_PORT"] %>

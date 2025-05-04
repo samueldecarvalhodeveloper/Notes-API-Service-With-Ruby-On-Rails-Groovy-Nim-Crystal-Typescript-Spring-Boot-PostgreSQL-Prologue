@@ -1,0 +1,19 @@
+#syntax=docker/dockerfile:experimental
+
+FROM node
+
+WORKDIR /src/app/
+
+ENV SERVER_PORT=3006
+ENV IN_MEMORY_DATABASE_HOST_NAME=host.docker.internal
+ENV IN_MEMORY_DATABASE_HOST_PORT=3008
+
+COPY ./tsconfig.json /src/app/tsconfig.json
+COPY ./package.json /src/app/package.json
+COPY ./src/ /src/app/src/
+
+RUN npm install
+
+CMD npm run start
+
+EXPOSE 3006

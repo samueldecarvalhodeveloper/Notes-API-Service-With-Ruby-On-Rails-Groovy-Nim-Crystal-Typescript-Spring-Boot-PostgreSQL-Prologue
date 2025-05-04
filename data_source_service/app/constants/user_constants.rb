@@ -1,0 +1,21 @@
+class UserConstants
+  USER_TO_BE_CREATED_USERNAME = "Samuel de Carvalho"
+
+  USER_TO_BE_CREATED_ID = 0
+
+  FIRST_USER_TO_BE_CREATED_ID = 0
+
+  SECOND_USER_TO_BE_CREATED_ID = 1
+
+  USER_TO_HAVE_USERNAME_UPDATED_NEW_USERNAME = "Other Name"
+
+  USER_ROUTE = "/users/"
+
+  USER_MAP_ID_KEY = "id"
+
+  USER_MAP_USERNAME_KEY = "username"
+
+  NUMBER_OF_CREATED_USERS = 2
+
+  RESPONSE_MAP_MESSAGE_KEY = "message"
+end

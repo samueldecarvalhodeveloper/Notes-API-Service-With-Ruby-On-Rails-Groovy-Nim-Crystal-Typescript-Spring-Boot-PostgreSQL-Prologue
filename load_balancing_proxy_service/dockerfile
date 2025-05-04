@@ -1,0 +1,18 @@
+# syntax=docker/dockerfile:1
+
+FROM crystallang/crystal:latest
+
+WORKDIR /usr/app/
+
+ENV PORT=3000
+ENV ENVIRONMENT=production
+ENV LIST_OF_HOST_NAMES=host.docker.internal:3001,host.docker.internal:3002,host.docker.internal:3003
+
+COPY ./shard.yml /usr/app/shard.yml
+COPY ./src/ /usr/app/src/
+
+RUN shards install
+
+CMD crystal run ./src/load_balancing_proxy_service.cr
+
+EXPOSE 3000

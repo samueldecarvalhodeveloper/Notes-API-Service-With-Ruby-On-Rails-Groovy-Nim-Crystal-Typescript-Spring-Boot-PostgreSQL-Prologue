@@ -1,0 +1,66 @@
+services:
+  in_memory_cache_database:
+    build:
+      context: ./in_memory_cache_database/
+      dockerfile: ./dockerfile
+    ports:
+      - 3008:3008
+
+  data_source_database:
+    build:
+      context: ./data_source_database/
+      dockerfile: ./dockerfile
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 3007:5432
+
+  in_memory_cache_service:
+    build:
+      context: ./in_memory_cache_service/
+      dockerfile: ./dockerfile
+    ports:
+      - 3006:3006
+
+  data_source_service:
+    build:
+      context: ./data_source_service/
+      dockerfile: ./dockerfile
+    ports:
+      - 3005:3000
+
+  message_queue_service:
+    build:
+      context: ./message_queue_service/
+      dockerfile: ./dockerfile
+    ports:
+      - 3004:3004
+
+  first_notes_api_service:
+    build:
+      context: ./notes_api_service/
+      dockerfile: ./dockerfile.server.first
+    ports:
+      - 3001:3001
+  
+  second_notes_api_service:
+    build:
+      context: ./notes_api_service/
+      dockerfile: ./dockerfile.server.second
+    ports:
+      - 3002:3002
+
+  third_notes_api_service:
+    build:
+      context: ./notes_api_service/
+      dockerfile: ./dockerfile.server.third
+    ports:
+      - 3003:3003
+
+  load_balancing_proxy_service:
+    build:
+      context: ./load_balancing_proxy_service/
+      dockerfile: ./dockerfile
+    ports:
+      - 3000:3000
