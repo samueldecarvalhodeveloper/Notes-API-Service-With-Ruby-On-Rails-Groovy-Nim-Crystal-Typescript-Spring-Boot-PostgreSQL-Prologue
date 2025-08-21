@@ -1,0 +1,6 @@
+/docs/
+/lib/
+/bin/
+/.shards/
+*.dwarf
+load_balancing_proxy_service

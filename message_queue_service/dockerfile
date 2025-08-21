@@ -1,0 +1,20 @@
+# syntax=docker/dockerfile:1
+
+FROM gradle:jdk21-alpine
+
+WORKDIR /src/app/
+
+ENV IN_MEMORY_SERVICE_URL=http://host.docker.internal:3006
+ENV DATA_SOURCE_SERVICE_URL=http://host.docker.internal:3005
+
+COPY ./settings.gradle /src/app/settings.gradle
+COPY ./gradlew /src/app/gradlew
+COPY ./build.gradle /src/app/build.gradle
+COPY ./src/ /src/app/src/
+COPY ./gradle /src/app/gradle
+
+RUN chmod +x /src/app/gradlew
+
+CMD /src/app/gradlew bootRun --args='--server.port=3004'
+
+EXPOSE 3004

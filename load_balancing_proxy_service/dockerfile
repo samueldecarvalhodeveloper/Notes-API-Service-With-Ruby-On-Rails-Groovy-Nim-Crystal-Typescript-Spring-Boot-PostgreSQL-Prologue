@@ -1,0 +1,19 @@
+# syntax=docker/dockerfile:1
+
+FROM crystallang/crystal:1.16.3-alpine
+
+WORKDIR /src/app/
+
+ENV PORT=3000
+ENV ENVIRONMENT=production
+ENV LIST_OF_HOST_NAMES=http://host.docker.internal:3001,http://host.docker.internal:3002,http://host.docker.internal:3003
+
+COPY ./shard.yml /src/app/shard.yml
+COPY ./shard.lock /src/app/shard.lock
+COPY ./src/ /src/app/src/
+
+RUN shards install
+
+CMD shards run
+
+EXPOSE 3000

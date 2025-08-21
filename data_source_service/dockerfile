@@ -1,0 +1,37 @@
+# syntax=docker/dockerfile:1
+
+FROM ruby:3.0.2
+
+WORKDIR /src/app/
+
+ENV ADAPTER=postgresql
+ENV HOST=host.docker.internal
+ENV DATABASE=postgres
+ENV USERNAME=postgres
+ENV PASSWORD=postgres
+ENV TESTING_PORT=3007
+ENV DEVELOPMENT_PORT=3007
+ENV PRODUCTION_PORT=3007
+ENV RAILS_ENV=production
+ENV SECRET_KEY_BASE=57ab889f61835865ef76c61659f28e1c50ac2564ef371c65dc5df449046b2f7bee1cfa12e2b691d25e8431022228a871781fb12325f1b192f45645e7615e8984
+
+RUN gem install rails
+
+COPY ./app/ /src/app/app/
+COPY ./bin/ /src/app/bin/
+COPY ./config/ /src/app/config/
+COPY ./db/ /src/app/db/
+COPY ./test/ /src/app/test/
+COPY ./.ruby-version /src/app/.ruby-version
+COPY ./config.ru /src/app/config.ru
+COPY ./Gemfile /src/app/Gemfile
+COPY ./Gemfile.lock /src/app/Gemfile.lock
+COPY ./Rakefile /src/app/Rakefile
+
+RUN bundle install
+
+RUN rails db:migrate
+
+CMD rails server
+
+EXPOSE 3000

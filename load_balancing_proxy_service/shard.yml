@@ -1,0 +1,21 @@
+name: load_balancing_proxy_service
+version: 0.1.0
+
+authors:
+  - Samuel de Carvalho <personal.samuelcarvalho@gmail.com>
+
+targets:
+  load_balancing_proxy_service:
+    main: src/load_balancing_proxy_service.cr
+
+crystal: '1.16.3'
+
+license: MIT
+
+dependencies:
+  grip:
+    github: grip-framework/grip
+    version: '3.0.2'
+
+  spectator:
+    github: grip-framework/spectator

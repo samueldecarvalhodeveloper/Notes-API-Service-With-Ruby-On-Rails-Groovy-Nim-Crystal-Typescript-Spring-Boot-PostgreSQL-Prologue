@@ -1,0 +1,18 @@
+# syntax=docker/dockerfile:1
+
+FROM nimlang/nim
+
+WORKDIR /src/app/
+
+ENV PORT=3003
+ENV MESSAGE_QUEUE_SERVICE_URL=http://host.docker.internal:3004
+
+COPY ./notes_api_service.nimble /src/app/notes_api_service.nimble
+COPY ./nimble.lock /src/app/nimble.lock
+COPY ./src/ /src/app/src/
+
+RUN nimble install
+
+CMD nimble run
+
+EXPOSE 3003

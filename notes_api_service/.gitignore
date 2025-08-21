@@ -1,0 +1,30 @@
+# Compiled Nim files
+*.o
+*.obj
+*.dll
+*.so
+*.dylib
+*.exe
+*.stackdump
+notes_api_service
+tests/megatest
+tests/megatest.nim
+testresults
+outputExpected.txt
+outputGotten.txt
+
+# Nim cache directories
+nimcache/
+nimble/
+
+# Backup files
+*~
+*.bak
+*.tmp
+
+# IDE specific files (e.g., Visual Studio Code)
+.vscode/
+.idea/
+
+# Logs
+*.log
